@@ -1,0 +1,43 @@
+This week's work teaches the basic use of axe DevTools,
+since it's the main engine in many other wrappers (e.g., Google Lighthouse).
+
+1. When asked to scan three different pages, I found the following:
+- Roblox: list elements not contained in an ordered/unordered list (count: 292)
+- Garland: zero failures
+- Personal website: missing button text (count: 5).
+
+My reflection was:
+a. I've personally found that many websites tend to fail in compliance with
+level AA of WCAG and rarely are at zero issues. (Roblox)
+
+b. At first I was genuinely surpised and checked another federal website.
+However, I remembered that federal corporations must comply to at least level AA
+of WCAG mandated by Section 508 with IoT products.
+
+I think whoever was audited probably used axe DevTools religiously, however I do 
+know its limitation to this specific website from personal audits myself.
+
+For example, the 'News' page has a searchbar for related keywords.
+The search text becomes covered by the search icon at around 240% magnification
+and is unable to be seen with no overflow.
+
+A potential fix for this would to add overflow to enable a scrollbar.
+
+c. This specifically relates to buttons in my Three.js scene, which is within
+a HTML canvas element. I'm currently having to design a keyboard navigation
+for this and should be on my way to adding accessible text for Three.js meshes.
+
+2. Compared to the online browser, running a script feels more detailed
+as it defines the tool's limitation with the *incomplete* bucket.
+
+3. For 'Buttons must have discernible text', I found that at
+least one of the following has to be true:
+
+Inner text that is discernible to screen reader users.
+Non-empty aria-label attribute.
+aria-labelledby pointing to element with text which is discernible to screen reader users.
+role="presentation" or role="none" (ARIA 1.1) and is not in tab order (tabindex="-1"). 
+
+The rule is testing if there is an accessible name for keyboard/screen-reader users.
+For me, I think a related rule to buttons would be if they have a focus indicator ratio
+of at least 3 to one from component-states, 1.4.11 Non-text Contrast (min).

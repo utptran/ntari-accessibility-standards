@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@types/mdx": "^2.0.14"
+  }
+}

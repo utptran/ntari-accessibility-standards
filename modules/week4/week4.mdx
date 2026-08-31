@@ -1,0 +1,46 @@
+I find that this week's topic is about a bigger picture of how
+NTARI, accessibility, and author interface design intertwine with another.
+
+One thing I found interesting from the passage was the use of !important.
+I've been learning CSS and ran into the line before, but I had no idea what it was for.
+
+Now that I know its purpose, I can connect it to agent stylesheets and it being overridden by 
+a user's own preference.
+
+I also learned how NTARI honors accessibility by a doctrine of ammendments.
+Five ammendments summarize the conformance of the WCAG 2.2 AA floor, and its
+scope and requirements in Janus-Facing Architecture (JFA) front-end.
+
+
+* POSITION NOTE ON PRESENTATIONAL SOVEREIGNTY 
+
+In my opinion, presentational sovereignty extends the tradition of accessibility as it
+allows each user to restyle their own render by their own will. This heavily aligns with 
+the tradition of web accessibility seen in CSS keyword '!important', as it overrides the
+author's or agent stylesheets.
+
+For context, each browser has their own user agent stylesheet. These sheets will contain default information
+such as default focus indicator color and width. For example, this is seen in success criteron (SC) 2.4.13 Focus Appearance,
+which allows the use of an author-supplied, visible focus indicator as a sufficient technique
+(G195: Using an author-supplied, visible focus indicator; link opens to new page - https://www.w3.org/WAI/WCAG22/Techniques/general/G195).
+
+The user agent stylesheet is chronologically the first stylsheet applied, which allows for
+overriding of rules, since chronologically later rules gain priority.
+
+This is seen in the CSS 'animation' property with '@keyword' frames, and in the CSS cascade algorithm.
+
+Placing the power to change these norms is a double-edged sword, as a user's inexperience or preferences
+may inherently violate the floor of WCAG level AA.
+
+Presentational sovereignty addresses this concern as long as the user's preferences only affects self-view render,
+the user's own render. The scope of change is what really matters, not if the preferences violate WCAG 2.2. AA floor,
+since the author or browser agent stylesheet should already comply to this, therefore, no liability
+should be held if JFA has done their side correctly.
+
+* END 
+
+
+Three ways that allowing pasting custom scripts into the app can be absued are:
+1. Injecting of malicious scripts to steal data.
+2. Destroying features or architecture leading to JFA being liable for damages.
+3. Venturing to areas where base cases aren't established, leading to unknown issues.

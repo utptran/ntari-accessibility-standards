@@ -1,0 +1,30 @@
+The reason why HTML customization is structural and presentational only, and no themes ever execute, is because presentational affects visual for accessibility compliances such as in images of text. 
+You can target the presentational value by color, font size, background color, font style.
+But the reason why I do this is because it sanitizes the allow list. 
+
+#1 
+HTML only organizes the hierarchy of elements, tells screen readers and browsers what it is rather than how it looks.
+As in separating CSS and JavaScript within its own file and just defining HTML as the DOM tree. 
+
+#2 
+The second requirement of no remote fetches from the user style is saying that the following mentioned network requests that CSS can make can be weaponized because every time the CSS reaches out to a network. 
+A malicious theme that is inputted by data theft tracks the pings when...
+by watching the server logs, ping it back for sensitive data and passwords. 
+
+The biggest one that I know of is loading fonts with that font face from the source URL example. It could be like getting Google Fonts. That's the biggest problem I see. 
+
+#3 
+If users can write CSS that restyles your interface, one bad line (like * { display: none !important }) can hide everything, including the button to undo it, and a typo is enough to do it. 
+So the undo control must live somewhere their CSS can't touch, like a separate panel, window, or sandboxed frame. 
+There should also be a backup reset that needs no visible UI at all, such as a keyboard shortcut or a URL like ?safe-mode=1. The rule behind it: never let the fix depend on the thing that might be broken.
+
+#4
+The CSS file holds your styling: colors, fonts, spacing, layout tweaks. Exporting your theme gives you a normal .css file, and importing someone else's theme means loading their .css file.
+
+The sanitized HTML is for any custom structure the editor allows, like a custom header, footer, or banner. "Sanitized" means it's cleaned of anything dangerous, especially scripts, so it can only change how things look, not run code.
+
+So instead of your theme being saved as something like theme_data.
+#5
+It's just referring to the scope and the NTARI commitment. 
+
+

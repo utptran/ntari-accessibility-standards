@@ -1,0 +1,8 @@
+Write the design spec (design-spec.md in your repo, 2–4 pages): 
+the surfaces, the sketches, the keyboard map, the focus plan, the reset + escape hatch, 
+the import/report flow, and a short conformance walk
+— the five requirements and the AA-floor obligations, each answered in one sentence of design.
+
+The protected Chrome is the top layer and closed off, as it contains user CSS that allows personal or local customization to occur by imports. CSS styling, the reason why the boundary stays here, as seeing, editing, or undoing styling view protects permission scope.
+
+Within the personal editor scope, there is controls convenient to styling, such as text size, color contrast, font typography, background color. Most importantly, the escape hatch noted by the variable userStyle turns custom view on and off. It pauses the CSS view but never deletes it. 

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><title>XSS Target</title></head>
+<body>
+  <h1>Guestbook</h1>
+  <form id="f">
+    <label for="msg">Message</label>
+    <input id="msg" name="msg">
+    <button>Post</button>
+    <button type="button" id="clear">Clear stored comments</button>
+  </form>
+  <div id="comments"></div>
+  <h2>Attacker's view (simulated)</h2>
+  <pre id="attacker-view"></pre>
+
+  <script>
+    // Fake loot
+    document.cookie = "session=FAKE-abc123; path=/";
+    localStorage.setItem("authToken", "FAKE-jwt-123");
+
+    // "Database"
+    const load = () => JSON.parse(localStorage.getItem("comments") || "[]");
+    const save = (c) => localStorage.setItem("comments", JSON.stringify(c));
+
+    // VULNERABLE sink
+    function render() {
+      document.getElementById("comments").innerHTML =
+        load().map(m => `<p>${m}</p>`).join("");
+    }
+
+    document.getElementById("f").addEventListener("submit", e => {
+      e.preventDefault();
+      save([...load(), e.target.msg.value]);
+      e.target.reset();
+      render();
+    });
+    document.getElementById("clear").addEventListener("click", () => {
+      localStorage.removeItem("comments");
+      document.getElementById("attacker-view").textContent = "";
+      render();
+    });
+    render();
+  </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+Before I go over each model architecture, I wanted to address the sanitizer and its requirements. 
+
+The theme are fixed values (not behavior) that are:
+1. Defined in one plane CSS stylesheet
+User edits and exports (raw CSS for styling, user edits by in-app editor, export means to download to edit)
+
+2. Sanitization named attached of extension points using HTML fragments
+The use HTML fragments deliberately keys each node as a slot name, and matches the external data (attribute data-ext) from the template to the user’s input for each node. Before the result is submitted, the node is sanitized against an allowlist, which can contain allowed tags and attributes. This prevents the injection of scripts, for example the literal use of the tag ‘script’.
+
+Below is a code excerpt showing this example:
+
+import DOMPurify from "dompurify";
+
+const ALLOWED = { ALLOWED_TAGS: ["p", "a", "b", "i", "img"],
+                  ALLOWED_ATTR: ["href", "src", "alt"] };
+
+for (const [name, html] of Object.entries(fragments)) {
+  const slot = document.querySelector(`[data-ext="${name}"]`);
+  if (!slot) continue;                         // unknown slot name: ignore
+  slot.innerHTML = DOMPurify.sanitize(html, ALLOWED);
+}
+
+This example follows the principle of separability, as it allows the user to edit their data (tags and attributes) while allowing the platform (web stack, such as DOMPurify) to sanitize the inputs.
+
+3. Saved-at non-executable (non-opaque?) named meta-data
+Meta-data is saved to track the publisher, fragment edited, CSS styling file, and when the edit was saved. It should be non-executable, as in parsed as plain data, to allow sanitization seen in the attachment points HTML fragments. One thing that stood out to me was the use of ‘non-opaque’. After some research, if found that opaque data means it can’t be manipulated (e.g., inspected or debugged). If the metadata is readable, then we can sanitize, compare saved versions in git, and migrate files when formatting changes.
+
+4. The report is explanatory as passing components fall under a clean list, whereas failing components will be pushed into a removals array. 
+
+# Floor Test
+It references a Playwright test we've created in week 3. My test specifically being success criteria on 2.4.2 page titled, which checked if the web page had a meaningful title.
+This was done by parsing the title tag of the page and compare it to its body content (automation and human collaboration).  
+
+First, we're going to scrub or sanitize the input of each element before accessibility testing.
+This is done to protect the auditor as well, before its being passed into other browsers.
+
+The floor test wants us to use our knowledge from week three to either test components by Jest or end-to-end with Playwright; 
+testing every state to the WCAG A/AA success criterion of the default theme and editor surfaces.
+
+# Components to test
+Panel opening: as in editor on-screen such as a side panel or popup.
+Report showing: message after import removed.
+Import dialog raised: import window open.
+
+Each need to be tested to the WCAG 2.1 AA.
+
+I think for me, it makes the most sense to use jest-axe, since we're testing particulary states of each component.
+
+# Sanitizer pipeline
+This is going to be based off of the threat types we've discovered in Week 5: The Five Requirements as a Threat Model,
+which are but not limited to:
+1. 
+
+
+
+
